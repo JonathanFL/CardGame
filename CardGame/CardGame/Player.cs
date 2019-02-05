@@ -6,32 +6,56 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    class Player
+    class Player : IPlayerBehavior
     {
-        private IPlayerBehavior _playerBehavior;
+        public string Name { get; set; }
 
-        public void SetPlayerBehavior(IPlayerBehavior pb)
+        public readonly List<Card> _cardList = new List<Card>();
+        private static readonly Random RndCardNumber = new Random();
+
+        public short NumberOfCards { get; set; }
+
+        public Player(string name, short numberOfCards)
         {
-            _playerBehavior = pb;
+            Name = name;
+            NumberOfCards = numberOfCards;
+        }
+
+        public virtual void AcceptCard()
+        {
+            short k = 0;
+            while (k != NumberOfCards)
+            {
+                var c = new Card();
+                _cardList.Add(c);
+                k++;
+            }
         }
 
         public void ShowCards()
         {
-            
+            Console.WriteLine("\n" + Name + ":");
+            for (short j = 0; j < _cardList.Count; j++)
+            {
+                Console.WriteLine(_cardList.ElementAt(j).Suit);
+            }
+            Console.WriteLine();
+        }
+
+        public int ValueOfHand()
+        {
+            int sumOfHand = 0;
+            foreach (var card in _cardList)
+            {
+                sumOfHand += card.Multiplier * card.CardNumber;
+            }
+
+            return sumOfHand;
+        }
+
+        public void ShowHandValue()
+        {
+            Console.WriteLine($"The hand value of {Name} is: {ValueOfHand()}");
         }
     }
 }
-/*
- *
- * for (short i = 0; i < numberOfPlayers; i++)
-            {
-                Card[] cards = new Card[numberOfCards];
-                for (short j = 0; j < numberOfCards; j++)
-                {
-                    cards[j] = new Card();
-                    Console.WriteLine(cards[i].Suit);
-                }
-                Console.WriteLine();
-            }
- *
- */

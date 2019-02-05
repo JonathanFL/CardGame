@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    class NormalPlayer : IPlayerBehavior
+    class NormalPlayer : Player
     {
-        public int HoldCards(int numberOfCards)
+        public NormalPlayer(string name, short numberOfCards) : base(name, numberOfCards)
         {
-            throw new NotImplementedException();
         }
+
+        public override void AcceptCard()
+        {
+            short k = 0;
+            while (k != NumberOfCards)
+            {
+                var c = new Card();
+                _cardList.Add(c);
+                k++;
+            }
+        }
+        
     }
 }

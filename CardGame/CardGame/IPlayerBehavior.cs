@@ -8,11 +8,11 @@ namespace CardGame
 {
     interface IPlayerBehavior
     {
-        //Handle different kinds of players - altså i Player klassen
-        //Vi vil gerne have funktionaliteten:
-        //IPlayerBehavior normalPlayer = new NormalPlayer();
-        //eller
-        //IPlayerBehavior weakPlayer = new WeakPlayer();
-        int HoldCards(int numberOfCards);
+        short NumberOfCards { get; set; }
+        string Name { get;}
+        void AcceptCard();
+        void ShowCards();
+        int ValueOfHand();
+        void ShowHandValue();
     }
 }

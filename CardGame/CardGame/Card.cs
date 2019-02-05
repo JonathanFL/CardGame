@@ -9,14 +9,16 @@ namespace CardGame
     class Card
     {
         public short Multiplier { get; set; }
+        public int CardNumber { get; set; }
         public string Suit { get; set; }
-        private static readonly Random rndMultiPlier = new Random();
-        private static readonly Random rndCardNumber = new Random();
+        private static readonly Random RndMultiPlier = new Random();
+        private static readonly Random RndCardNumber = new Random();
 
         public Card()
         {
-            Multiplier = (short) rndMultiPlier.Next(1, 5);
-            Suit = DetermineColor(Multiplier) + " " + rndCardNumber.Next(1, 9);
+            Multiplier = (short) RndMultiPlier.Next(1, 5);
+            CardNumber = RndCardNumber.Next(1, 9);
+            Suit = DetermineColor(Multiplier) + " " + CardNumber;
         }
         
         private string DetermineColor(short multiplier)

@@ -8,6 +8,9 @@ namespace CardGame
 {
     class Program
     {
+        public static short NumberOfCards { get; set; }
+        private static string Name { get; set; }
+
         static void Main(string[] args)
         {
             while (true)
@@ -15,15 +18,19 @@ namespace CardGame
                 Console.WriteLine("\nWelcome to a game of cards!");
                 Console.WriteLine("How many players will be joining?");
                 short _numberOfPlayers;
-
                 if (short.TryParse(Console.ReadLine(), out _numberOfPlayers))
                 {
                     if (_numberOfPlayers <= 0)
                     {
                         throw new Exception("Number must be positive and non zero");
                     }
-                    else
-                    {
+                    Console.WriteLine("How many cards should everyone have?");
+                        short _numberOfCards = 0;
+                        if (short.TryParse(Console.ReadLine(), out _numberOfCards))
+                        {
+                            NumberOfCards = _numberOfCards;
+                        }
+                        
                         Player[] players = new Player[_numberOfPlayers];
 
                         Console.WriteLine("The game can have normal and \"weak\" players\n");
@@ -35,23 +42,33 @@ namespace CardGame
                             playerType = Console.ReadLine();
                             if (playerType != null && (playerType.Equals("yes") || playerType.Equals("Yes")))
                             {
-                                players[i] = new Player();
-                                players[i].SetPlayerBehavior(new NormalPlayer());
-                            }
+                                Console.WriteLine("What is the name of player" + i + " ?");
+                                Name = Console.ReadLine();
+                                players[i] = new NormalPlayer(Name, NumberOfCards);
+                                players[i].AcceptCard();
+                        }
                             else if (playerType != null && (playerType.Equals("No") || playerType.Equals("no")))
                             {
-                                players[i] = new Player();
-                                players[i].SetPlayerBehavior(new WeakPlayer());
+                                Console.WriteLine("What is the name of player" + i + " ?");
+                                Name = Console.ReadLine();
+                                players[i] = new WeakPlayer(Name, NumberOfCards);
+                                players[i].AcceptCard();
                             }
                             else
                             {
                                 throw new ArgumentException("You didn't input yes or no");
                             }
                         }
+                        Game game = new Game();
 
-                        Deck testDeck = new Deck(players);
+                        foreach (var p in players)
+                        {
+                            p.ShowCards();
+                            p.ShowHandValue();
+                            game.CalculateWinner(p.ValueOfHand());
+                        }
+                        Console.WriteLine($"\n\nThe winner has {game.Winner} points... CONGRATULATIONS!");
                     }
-                }
                 else
                 {
                     Console.WriteLine("Number of players must only be maximum 32,767 and only contain integer value");
@@ -59,5 +76,6 @@ namespace CardGame
             }
 
         }
+        
     }
 }
