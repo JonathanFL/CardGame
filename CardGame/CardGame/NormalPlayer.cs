@@ -8,17 +8,19 @@ namespace CardGame
 {
     class NormalPlayer : Player
     {
+        private readonly short _numberOfCards;
         public NormalPlayer(string name, short numberOfCards) : base(name, numberOfCards)
         {
+            _numberOfCards = numberOfCards;
         }
 
         public override void AcceptCard()
         {
             short k = 0;
-            while (k != NumberOfCards)
+            while (k != _numberOfCards)
             {
                 var c = new Card();
-                _cardList.Add(c);
+                CardList.Add(c);
                 k++;
             }
         }

@@ -10,21 +10,24 @@ namespace CardGame
     {
         private static readonly Random RndCardNumber = new Random();
 
+        private readonly short _numberOfCards;
+
         public WeakPlayer(string name, short numberOfCards) : base(name, numberOfCards)
         {
+            _numberOfCards = numberOfCards;
         }
 
         public override void AcceptCard()
         {
             short k = 0;
-            while (k != NumberOfCards)
+            while (k != _numberOfCards)
             {
                 var c1 = new Card();
-                _cardList.Add(c1);
+                CardList.Add(c1);
                 k++;
-                if (_cardList.Count.Equals(4))
+                if (CardList.Count.Equals(4))
                 {
-                    _cardList.RemoveAt(RndCardNumber.Next(1, 4));
+                    CardList.RemoveAt(RndCardNumber.Next(1, 4));
                 }
             }
         }

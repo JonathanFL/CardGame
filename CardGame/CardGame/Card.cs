@@ -16,7 +16,7 @@ namespace CardGame
 
         public Card()
         {
-            Multiplier = (short) RndMultiPlier.Next(1, 5);
+            Multiplier = (short) RndMultiPlier.Next(1, 6);
             CardNumber = RndCardNumber.Next(1, 9);
             Suit = DetermineColor(Multiplier) + " " + CardNumber;
         }
@@ -33,6 +33,8 @@ namespace CardGame
                     return "Green";
                 case 4:
                     return "Yellow";
+                case 5:
+                    return "Gold";
                 default:
                     return "Blank";
             }

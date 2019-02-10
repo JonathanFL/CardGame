@@ -1,18 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardGame
 {
     class Program
     {
-        public static short NumberOfCards { get; set; }
-        private static string Name { get; set; }
+        //public static short NumberOfCards { get; set; }
+        //private static string Name { get; set; }
+
+        private const int Cards = 10;
+
+        static void AcceptCard(Player player)
+        {
+            player.AcceptCard();
+        }
+
+        static void ShowCards(Player player)
+        {
+            player.ShowCards();
+        }
+
+        static void ShowHandValue(Player player)
+        {
+            player.ShowHandValue();
+        }
 
         static void Main(string[] args)
         {
+            var game1 = new Game(GameType.HighestWin);
+
+            var pb = new NormalPlayer("jons", Cards);
+            var pb2 = new WeakPlayer("jons2", Cards);
+            var pb3 = new NormalPlayer("Troels", Cards);
+            var pb4 = new NormalPlayer("Yibin",Cards);
+            var pb5 = new WeakPlayer("Jons", Cards);
+
+            AcceptCard(pb);
+            AcceptCard(pb2);
+            AcceptCard(pb3);
+            AcceptCard(pb4);
+            AcceptCard(pb5);
+
+            ShowCards(pb);
+            ShowCards(pb2);
+            ShowCards(pb3);
+            ShowCards(pb4);
+            ShowCards(pb5);
+
+            ShowHandValue(pb);
+            ShowHandValue(pb2);
+            ShowHandValue(pb3);
+            ShowHandValue(pb4);
+            ShowHandValue(pb5);
+
+            game1.CalculateWinner(pb.ValueOfHand());
+            game1.CalculateWinner(pb2.ValueOfHand());
+            game1.CalculateWinner(pb3.ValueOfHand());
+            game1.CalculateWinner(pb4.ValueOfHand());
+            game1.CalculateWinner(pb5.ValueOfHand());
+
+            Console.WriteLine($"Winner: {game1.Winner}");
+
+            Console.ReadLine();
+
+            /*
             while (true)
             {
                 Console.WriteLine("\nWelcome to a game of cards!");
@@ -59,7 +109,7 @@ namespace CardGame
                                 throw new ArgumentException("You didn't input yes or no");
                             }
                         }
-                        Game game = new Game();
+                        Game game = new Game(GameType.HighestWin);
 
                         foreach (var p in players)
                         {
@@ -73,9 +123,8 @@ namespace CardGame
                 {
                     Console.WriteLine("Number of players must only be maximum 32,767 and only contain integer value");
                 }
-            }
+            }*/
 
         }
-        
     }
 }

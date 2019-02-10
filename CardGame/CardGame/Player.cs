@@ -10,34 +10,27 @@ namespace CardGame
     {
         public string Name { get; set; }
 
-        public readonly List<Card> _cardList = new List<Card>();
-        private static readonly Random RndCardNumber = new Random();
+        public List<Card> CardList = new List<Card>();
 
-        public short NumberOfCards { get; set; }
+        private short _numberOfCards = 0;// value is used in derived classes
 
         public Player(string name, short numberOfCards)
         {
             Name = name;
-            NumberOfCards = numberOfCards;
+            _numberOfCards = numberOfCards;
         }
 
         public virtual void AcceptCard()
         {
-            short k = 0;
-            while (k != NumberOfCards)
-            {
-                var c = new Card();
-                _cardList.Add(c);
-                k++;
-            }
+            Console.WriteLine("Base class AcceptCard() - does nothing");
         }
 
         public void ShowCards()
         {
             Console.WriteLine("\n" + Name + ":");
-            for (short j = 0; j < _cardList.Count; j++)
+            for (short j = 0; j < CardList.Count; j++)
             {
-                Console.WriteLine(_cardList.ElementAt(j).Suit);
+                Console.WriteLine(CardList.ElementAt(j).Suit);
             }
             Console.WriteLine();
         }
@@ -45,7 +38,7 @@ namespace CardGame
         public int ValueOfHand()
         {
             int sumOfHand = 0;
-            foreach (var card in _cardList)
+            foreach (var card in CardList)
             {
                 sumOfHand += card.Multiplier * card.CardNumber;
             }
