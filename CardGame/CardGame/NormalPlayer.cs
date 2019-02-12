@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    class NormalPlayer : Player
+    class NormalPlayer : Player, IPlayerBehavior
     {
         private readonly short _numberOfCards;
         public NormalPlayer(string name, short numberOfCards) : base(name, numberOfCards)
@@ -14,7 +14,7 @@ namespace CardGame
             _numberOfCards = numberOfCards;
         }
 
-        public override void AcceptCard()
+        public new void AcceptCard()
         {
             short k = 0;
             while (k != _numberOfCards)
@@ -24,6 +24,7 @@ namespace CardGame
                 k++;
             }
         }
+
         
     }
 }

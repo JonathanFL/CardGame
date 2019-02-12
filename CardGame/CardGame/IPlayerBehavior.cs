@@ -8,11 +8,7 @@ namespace CardGame
 {
     interface IPlayerBehavior
     {
-        //short NumberOfCards;
-        string Name { get;}
+        //short NumberOfCards { get; set; }s
         void AcceptCard();
-        void ShowCards();
-        int ValueOfHand();
-        void ShowHandValue();
     }
 }

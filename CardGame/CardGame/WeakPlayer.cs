@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    class WeakPlayer : Player
+    class WeakPlayer : Player, IPlayerBehavior
     {
         private static readonly Random RndCardNumber = new Random();
 
@@ -17,7 +17,7 @@ namespace CardGame
             _numberOfCards = numberOfCards;
         }
 
-        public override void AcceptCard()
+        public new void AcceptCard()
         {
             short k = 0;
             while (k != _numberOfCards)

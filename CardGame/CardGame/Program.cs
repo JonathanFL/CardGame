@@ -7,7 +7,7 @@ namespace CardGame
         //public static short NumberOfCards { get; set; }
         //private static string Name { get; set; }
 
-        private const int Cards = 10;
+        private const int Cards = 4;
 
         static void AcceptCard(Player player)
         {
@@ -28,19 +28,29 @@ namespace CardGame
         {
             var game1 = new Game(GameType.HighestWin);
 
-            var pb = new NormalPlayer("jons", Cards);
-            var pb2 = new WeakPlayer("jons2", Cards);
-            var pb3 = new NormalPlayer("Troels", Cards);
-            var pb4 = new NormalPlayer("Yibin",Cards);
-            var pb5 = new WeakPlayer("Jons", Cards);
+            Player pb = new Player("jons", Cards);
+            Player pb2 = new WeakPlayer("jons2", Cards);
+            Player pb3 = new NormalPlayer("Troels", Cards);
+            Player pb4 = new NormalPlayer("Yibin",Cards);
+            Player pb5 = new WeakPlayer("Jons", Cards);
 
-            AcceptCard(pb);
-            AcceptCard(pb2);
+            var test = new WeakPlayer("Jons", Cards);
+            pb.SetPlayerBehavior(test);
+
+            pb.AcceptCard();
+
+            /*AcceptCard(pb2);
             AcceptCard(pb3);
             AcceptCard(pb4);
             AcceptCard(pb5);
-
+            */
             ShowCards(pb);
+
+            pb.SetPlayerBehavior(pb3);
+            pb.AcceptCard();
+            ShowCards(pb);
+
+            // TODO
             ShowCards(pb2);
             ShowCards(pb3);
             ShowCards(pb4);

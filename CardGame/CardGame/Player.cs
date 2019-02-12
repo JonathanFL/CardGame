@@ -14,15 +14,24 @@ namespace CardGame
 
         private short _numberOfCards = 0;// value is used in derived classes
 
+        private IPlayerBehavior _playerBehavior;
+
         public Player(string name, short numberOfCards)
         {
             Name = name;
             _numberOfCards = numberOfCards;
         }
 
-        public virtual void AcceptCard()
+        public void SetPlayerBehavior(IPlayerBehavior playerBehavior)// don't know what to do with this...
         {
-            Console.WriteLine("Base class AcceptCard() - does nothing");
+            _playerBehavior = playerBehavior;
+            //throw new NotImplementedException("Not sure how to implement this behaviour in my current design");
+        }
+
+        public void AcceptCard()
+        {
+            //Console.WriteLine("Base class AcceptCard() - does nothing");
+            _playerBehavior.AcceptCard();
         }
 
         public void ShowCards()
