@@ -15,36 +15,43 @@ namespace CardGame
 
     class Game
     {
-        public int Winner { get; set; }
+        public int WinnerPoints { get; set; }
+        public string WinnerName { get; set; }
 
         private static GameType _gameType;
 
-        private bool helpVar = false;
+        private bool _helpVar = false;
 
         public Game(GameType gameType)
         {
             _gameType = gameType;
         }
 
-        public void CalculateWinner(int cardValue)
+        public void CalculateWinner(Player lpl)
         {
-            if (_gameType.Equals(GameType.HighestWin))
+            switch (_gameType)
             {
-                if (cardValue > Winner)
-                {
-                    Winner = cardValue;
-                }
-            }else if (_gameType.Equals(GameType.LowestWin))
-            {
-                if (helpVar == false)
-                {
-                    helpVar = true;
-                    Winner = cardValue;
-                }
-                if (cardValue < Winner)
-                {
-                    Winner = cardValue;
-                }
+                case GameType.HighestWin:
+                    if (lpl.ValueOfHand() > WinnerPoints)
+                    {
+                        WinnerPoints = lpl.ValueOfHand();
+                        WinnerName = lpl.Name;
+
+                    }
+                    break;
+                case GameType.LowestWin:
+                    if (_helpVar == false)
+                    {
+                        _helpVar = true;
+                        WinnerPoints = lpl.ValueOfHand();
+                        WinnerName = lpl.Name;
+                    }
+                    if (lpl.ValueOfHand() < WinnerPoints)
+                    {
+                        WinnerPoints = lpl.ValueOfHand();
+                        WinnerName = lpl.Name;
+                    }
+                    break;
             }
         }
         

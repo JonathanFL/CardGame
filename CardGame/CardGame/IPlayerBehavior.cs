@@ -10,5 +10,10 @@ namespace CardGame
     {
         //short NumberOfCards { get; set; }s
         void AcceptCard();
+        void ShowCards();
+        int ValueOfHand();
+        void ShowValueOfHand();
+        string Name { get; set; }
+        int NumberOfCards { get; set; }
     }
 }
