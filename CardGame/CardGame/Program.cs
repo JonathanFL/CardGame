@@ -9,7 +9,7 @@ namespace CardGame
 
         private const int Cards = 5;
 
-        static void AcceptCard(Player player)
+        static void AcceptCard(Player player)//hej
         {
             player.AcceptCard();
         }
