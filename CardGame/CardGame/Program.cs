@@ -6,24 +6,7 @@ namespace CardGame
     {
         //public static short NumberOfCards { get; set; }
         //private static string Name { get; set; }
-
-        private const int Cards = 5;
-
-        static void AcceptCard(Player player)//hej
-        {
-            player.AcceptCard();
-        }
-
-        static void ShowCards(Player player)
-        {
-            player.ShowCards();
-        }
-
-        static void ShowHandValue(Player player)
-        {
-            player.ShowHandValue();
-        }
-
+        
         static void Main(string[] args)
         {
             var game1 = new Game(GameType.HighestWin);
